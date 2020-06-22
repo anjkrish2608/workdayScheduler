@@ -30,9 +30,45 @@
     </header>
     <div class="container">
       <!-- Timeblocks go here -->
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+      <table id="form">
+      </table>
+      </div>
+      <div class="col-lg-3"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script>
+      var timeArray = ["9AM","10AM","11AM","12PM","1PM","2PM","3PM","4PM","5PM"];
+      for(var i=0;i<timeArray.length;i++){
+        //create variable to div
+        var div =$("#form");
+        //create new row w/ class
+        var row =$("<tr>");
+        row.attr("class","row time-block");
+        //create new data cell
+        var datacell=$("<td>").text(timeArray[i]);
+        datacell.attr("class","hour")
+        //append
+        row.append(datacell);
+        //input cell
+        var inputcell =$("<input>").attr("type","text");
+        inputcell.attr("class","description")
+        //append
+        row.append(inputcell);
+        //another data cell w/ button
+        var saveDataCell =$("<td>");
+        var saveButton=$("<button>");
+        saveButton.html("<i></i>");
+        saveButton.attr("class","fas fa-save saveBtn")
+        //append
+        saveDataCell.append(saveButton);
+        row.append(saveDataCell);
+        //create table
+        div.append(row);
+      }
+    </script>
   </body>
 </html>
