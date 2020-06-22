@@ -42,24 +42,51 @@
       var row = $("<tr>");
       row.attr("class", "row time-block");
       //create new data cell
-      var datacell = $("<td>").text(timeArray[i]);
-      datacell.attr("class", "hour")
+      var cell1 = $("<td>").text(timeArray[i]);
+        cell1.attr("class", "hour")
       //append
-      row.append(datacell);
+      row.append(cell1);
+      //new cell
+      var cell2 = $("<td>");
+      //form
+      var form= $("<form>");
+      form.attr("class", "description");
       //input cell
       var inputcell = $("<input>").attr("type", "text");
-      inputcell.attr("class", "description")
+      inputcell.attr("name",i);
+      inputcell.attr("class", "description");
+      //grabbing local storage
+      var text= localStorage.getItem(i);
+      inputcell.attr("value",text);      
       //append
-      row.append(inputcell);
+      form.append(inputcell);
+      cell2.append(form);
+      row.append(cell2);
       //another data cell w/ button
+      var cell3 = $("<td>");
       var saveButton = $("<button>");
       saveButton.html("<i></i>");
       saveButton.attr("class", "fas fa-save saveBtn")
+      saveButton.attr("name",i);
       //append
-      row.append(saveButton);
+      cell3.append(saveButton);
+      row.append(cell3);
       //create table
       div.append(row);
     }
+
+    //function on click
+    $(".saveBtn").on("click",function(){
+      var contentArray;
+      var input=$("input");
+      var inputVal =input.val();
+      if(input.attr("name")===this.name){
+        localStorage.setItem(this.name,inputVal);
+      }
+    });
+
+    
+
   </script>
 </body>
 
