@@ -42,57 +42,58 @@
       var row = $("<tr>");
       row.attr("class", "row time-block");
       //setting colors
-    var d = new Date();
-    var currentHour= console.log(d.getHours());
-    if(currentHour>12){
-      var index = timeArray.indexOf(currentHour-12);
-    }
-    else if(currentHour<=12){
-      var index = timeArray.indexOf(currentHour);
-    }
-   
-    //current color
-    if(i===index){
-      row.attr("class","present");
-    }
-    //past colors
-    else if(i<index){
-      row.attr("class","past");
-    }
-    //future
-    else if(i>index){
-    row.attr("class","future");
-    }
-    else if(index===-1){
-      alert("end of work day");
-    }
+      var d = new Date();
+      var currentHour = d.getHours();
+
+      if (currentHour > 12) {
+        var index = timeArray.indexOf(currentHour - 12);
+      }
+      else if (currentHour <= 12) {
+        var index = timeArray.indexOf(currentHour);
+      }
+
+      //current color
+      if (i === index) {
+        row.attr("class", "present");
+      }
+      //past colors
+      else if (i < index) {
+        row.attr("class", "past");
+      }
+      //future
+      else if (i > index) {
+        row.attr("class", "future");
+      }
+      else if (index === -1) {
+        alert("end of work day");
+      }
       //create new data cell
       var cell1 = $("<td>");
       //adding am or pm
-      if(i<3){
-        cell1.text(timeArray[i]+"AM");
+      if (i < 3) {
+        cell1.text(timeArray[i] + "AM");
       }
-      else{
-        cell1.text(timeArray[i]+"PM");
+      else {
+        cell1.text(timeArray[i] + "PM");
       }
       //adding attributes
-        cell1.attr("class", "hour");
-        cell1.attr("name", i);
+      cell1.attr("class", "hour");
+      cell1.attr("name", i);
       //append
       row.append(cell1);
       //new cell
       var cell2 = $("<td>");
       //form
-      var form= $("<form>");
+      var form = $("<form>");
       form.attr("class", "description");
       //input cell
       var inputcell = $("<input>").attr("type", "text");
       inputcell.html("<textarea></textarea>");
-      inputcell.attr("name",i);
+      inputcell.attr("name", i);
       inputcell.attr("class", "description");
       //grabbing local storage
-      var text= localStorage.getItem(i);
-      inputcell.attr("value",text);      
+      var text = localStorage.getItem(i);
+      inputcell.attr("value", text);
       //append
       form.append(inputcell);
       cell2.append(form);
@@ -102,8 +103,8 @@
       var saveButton = $("<button>");
       saveButton.html("<i></i>");
       saveButton.attr("class", "saveBtn fas fa-save")
-      saveButton.attr("name",i);
-      cell3.attr("class","saveBtn");
+      saveButton.attr("name", i);
+      cell3.attr("class", "saveBtn");
       //append
       cell3.append(saveButton);
       row.append(cell3);
@@ -112,14 +113,42 @@
     }
 
     //function on click
-    $(".saveBtn").on("click",function(){
+    $(".saveBtn").on("click", function () {
       var contentArray;
-      var input=$("input");
-      var inputVal =input.val();
-      if(input.attr("name")===this.name){
-        localStorage.setItem(this.name,inputVal);
+      var input = $("input");
+      var inputVal = input.val();
+      if (input.attr("name") === this.name) {
+        localStorage.setItem(this.name, inputVal);
       }
     });
+
+    //setting current day and date
+    var d = new Date();
+    var dayArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    var monthArray = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    //returns day as number 0 to 6
+    var dayIndex = d.getDay();
+    //returns day as number 1 to 31
+    var date = d.getDate();
+    //returns month as number 0 to 11
+    var monthIndex = d.getMonth();
+    //returns year
+    var year = d.getFullYear();
+    //ordinals
+    //#Source https://bit.ly/2neWfJ2 
+    const toOrdinalSuffix = num => {
+      const int = parseInt(num),
+        digits = [int % 10, int % 100],
+        ordinals = ['st', 'nd', 'rd', 'th'],
+        oPattern = [1, 2, 3, 4],
+        tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+      return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
+        ? int + ordinals[digits[0] - 1]
+        : int + ordinals[3];
+    };
+
+    //attach to html
+    $("#currentDay").text(dayArray[dayIndex] + ", " +toOrdinalSuffix(date) + " of " + monthArray[monthIndex] + " " + year);
   </script>
 </body>
 
