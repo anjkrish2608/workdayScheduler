@@ -9,7 +9,23 @@ Furthermore I learnt how to access the current time, as shown in the code quoted
     var currentHour= console.log(d.getHours());
     
 ```
-This was learnt from [W3Schools.com](https://www.w3schools.com/JSREF/jsref_gethours.asp). I enjoyed completing the backend JavaScript necessary to store the data. It was a long nit picking process but I am very proud of the final result shown below.
+This was learnt from [W3Schools.com](https://www.w3schools.com/JSREF/jsref_gethours.asp), as well as the similar functions used to construct the date in the header. Furthermore to create the date in the header with a *Ordinal Suffix* the following code was used:
+```
+//#Source https://bit.ly/2neWfJ2 
+    const toOrdinalSuffix = num => {
+      const int = parseInt(num),
+        digits = [int % 10, int % 100],
+        ordinals = ['st', 'nd', 'rd', 'th'],
+        oPattern = [1, 2, 3, 4],
+        tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
+      return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
+        ? int + ordinals[digits[0] - 1]
+        : int + ordinals[3];
+    };
+
+```
+I found this code at [w3resource.com](https://www.w3resource.com/javascript-exercises/fundamental/javascript-fundamental-exercise-122.php), the JavaScript in particular is referenced to a GitHub Repo called [30-seconds](https://github.com/30-seconds/30-seconds-of-code).
+I enjoyed completing the backend JavaScript necessary to store the data. It was a long nit picking process but I am very proud of the final result shown below.
 
 ![day planner](./Develop/preview.png)
 
