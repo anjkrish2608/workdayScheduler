@@ -87,6 +87,7 @@
       form.attr("class", "description");
       //input cell
       var inputcell = $("<input>").attr("type", "text");
+      inputcell.html("<textarea></textarea>");
       inputcell.attr("name",i);
       inputcell.attr("class", "description");
       //grabbing local storage
@@ -100,8 +101,9 @@
       var cell3 = $("<td>");
       var saveButton = $("<button>");
       saveButton.html("<i></i>");
-      saveButton.attr("class", "fas fa-save saveBtn")
+      saveButton.attr("class", "saveBtn fas fa-save")
       saveButton.attr("name",i);
+      cell3.attr("class","saveBtn");
       //append
       cell3.append(saveButton);
       row.append(cell3);

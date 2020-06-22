@@ -11,7 +11,7 @@ textarea{
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
-  height: auto;
+  height: 78px;
 }
 
 .jumbotron {
@@ -25,6 +25,7 @@ textarea{
 .description{
   white-space: pre-wrap;
   width:500px;
+  height: 78px;
 }
 
 .time-block{
