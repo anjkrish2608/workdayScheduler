@@ -34,16 +34,50 @@
   <script>
 
     //Forming the table layout
-    var timeArray = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
+    var timeArray = ["9", "10", "11", "12", "1", "2", "3", "4", "5"];
     for (var i = 0; i < timeArray.length; i++) {
       //create variable to div
       var div = $("#form");
       //create new row w/ class
       var row = $("<tr>");
       row.attr("class", "row time-block");
+      //setting colors
+    var d = new Date();
+    var currentHour= console.log(d.getHours());
+    if(currentHour>12){
+      var index = timeArray.indexOf(currentHour-12);
+    }
+    else if(currentHour<=12){
+      var index = timeArray.indexOf(currentHour);
+    }
+   
+    //current color
+    if(i===index){
+      row.attr("class","present");
+    }
+    //past colors
+    else if(i<index){
+      row.attr("class","past");
+    }
+    //future
+    else if(i>index){
+    row.attr("class","future");
+    }
+    else if(index===-1){
+      alert("end of work day");
+    }
       //create new data cell
-      var cell1 = $("<td>").text(timeArray[i]);
-        cell1.attr("class", "hour")
+      var cell1 = $("<td>");
+      //adding am or pm
+      if(i<3){
+        cell1.text(timeArray[i]+"AM");
+      }
+      else{
+        cell1.text(timeArray[i]+"PM");
+      }
+      //adding attributes
+        cell1.attr("class", "hour");
+        cell1.attr("name", i);
       //append
       row.append(cell1);
       //new cell
@@ -84,9 +118,6 @@
         localStorage.setItem(this.name,inputVal);
       }
     });
-
-    
-
   </script>
 </body>
 
